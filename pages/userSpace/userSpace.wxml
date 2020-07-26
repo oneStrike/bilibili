@@ -1,0 +1,122 @@
+<!--pages/userSpace/userSpace.wxml-->
+<wxs src="../../utils/common.wxs" module="common"></wxs>
+<import src="../../components/spaceDynamic/spaceDynamic.wxml"/>
+<import src="../../components/popularList/popularList.wxml"/>
+<import src="/components/comment/comment.wxml"/>
+<view class="user-space-container" hidden="{{!userInfo}}">
+  <view class="space-user">
+    <view class="space-bg">
+      <image mode="widthFix" src="{{userInfo.space.s_img}}"></image>
+    </view>
+    <!--    用户信息-->
+    <view class="user-info">
+      <!--        基础信息-->
+      <view class="space-user-basic-info">
+        <image src="{{userInfo.card.face}}" class="space-user-avatar"></image>
+        <view class="space-user-relation">
+          <view class="space-user-count">
+            <view class="space-fans-num">
+              <text>{{common.rePlayCount(userInfo.card.fans)}}</text>
+              <text class="space-count-type">粉丝</text>
+            </view>
+            <view class="space-attention">
+              <text>{{userInfo.card.attention}}</text>
+              <text class="space-count-type">关注</text>
+            </view>
+            <view class="space-like">
+              <text>{{common.rePlayCount(userInfo.likes)}}</text>
+              <text class="space-count-type">点赞</text>
+            </view>
+          </view>
+          <view class="space-attention-btn">
+            <button plain>关注</button>
+          </view>
+        </view>
+      </view>
+      <!--    简介-->
+      <view class="space-user-des">
+        <!--       用户名& 会员等级-->
+        <view class="space-user-level">
+          <text>{{userInfo.card.name}}</text>
+          <image wx:if="{{userInfo.card.level_info.current_level}}"
+                 src="../../static/images/space/level_{{userInfo.card.level_info.current_level}}.svg"></image>
+          <view class="space-vip" wx:if="{{userInfo.card.vip.vipType>0}}">
+            <text wx:if="{{userInfo.card.vip.vipType===2&&userInfo.card.vip.vipStatus===1}}"
+                  class="space-vip-type">年度大会员
+            </text>
+            <text wx:if="{{userInfo.card.vip.vipType===1&&userInfo.card.vip.vipStatus===1}}"
+                  class="space-vip-type">月会员
+            </text>
+          </view>
+        </view>
+        <!--        UP认证-->
+        <view class="space-spread" wx:if="{{userInfo.card.Official.title}}">
+          <text>bilibili UP主认证</text>
+          <text>{{userInfo.card.Official.title}}</text>
+        </view>
+        <!--        用户签名-->
+        <view class="space-sign">
+          <text>{{userInfo.card.sign}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="space-show-content">
+    <!--    导航-->
+    <view class="space-nav {{isTop?'space-nav-top':''}}">
+      <text bindtap="toggleContent"
+            data-type="dynamic"
+            class="dynamic {{activePlate==='dynamic'?'active-plate':''}}">动态
+      </text>
+      <text bindtap="toggleContent"
+            data-type="video"
+            class="video {{activePlate==='video'?'active-plate':''}}">视频
+      </text>
+      <text bindtap="toggleContent"
+            data-type="photo"
+            class="photo {{activePlate==='photo'?'active-plate':''}}">相册
+      </text>
+    </view>
+    <!--    内容-->
+    <view class="content-detail">
+      <!--            动态-->
+      <view hidden="{{activePlate !=='dynamic'}}">
+        <view class="dynamic-content"
+              wx:for="{{spaceData.cards}}"
+              wx:key="index">
+          <template is="spaceDynamic"
+                    data="{{...userInfo,playUrl,playId,...item.display,...item.desc,...common.dynamic(item.card)}}"></template>
+        </view>
+      </view>
+      <!--            投稿视频-->
+      <view hidden="{{activePlate !=='video'}}">
+        <view wx:for="{{contribution}}"
+              wx:key="index"
+              bindtap="playVideo"
+              data-video="{{item}}">
+          <template is="popularList" data="{{...item}}"></template>
+        </view>
+      </view>
+      <!--            相簿-->
+      <view hidden="{{activePlate !=='photo'}}" class="photo-container">
+        <view class="photo-content"
+              wx:for="{{photoData}}"
+              wx:key="index">
+          <view class="photo-cover">
+            <image src="{{item.pictures[0].img_src}}" class="cover"></image>
+            <text class="count">{{item.pictures.length}}p</text>
+          </view>
+          <view class="photo-title">
+            <text class="title">{{item.description}}</text>
+            <view>
+              <image src="../../static/images/space/view.svg"></image>
+              <text class="watch">{{common.rePlayCount(item.view)}}</text>
+              <image src="../../static/images/space/reply.svg"></image>
+              <text class="comment">{{common.rePlayCount(item.comment)}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

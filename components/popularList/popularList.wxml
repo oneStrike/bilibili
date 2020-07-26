@@ -1,0 +1,18 @@
+<!--components/papularList/papularList.wxml-->
+<wxs src="../../utils/common.wxs" module="common"/>
+
+<template name="popularList">
+    <view class="list-container">
+        <view class="cover-container">
+            <image class="v-cover" lazy-load="true" src="{{pic}}"></image>
+            <text wx:if="{{duration.length<7}}" class="v-duration">{{duration}}</text>
+            <text wx:else class="v-duration">{{common.reDuration(duration)}}</text>
+        </view>
+        <view class="v-brief">
+            <rich-text class="v-title" nodes="{{title}}"></rich-text>
+            <text class="v-up-name">{{owner?owner.name:author}}</text>
+            <text class="v-play-count">{{common.rePlayCount((stat?stat.view:play))}}</text>
+            <text class="v-pubdate">{{pubdate?common.reTimestamp(pubdate):common.reTimestamp(created)}}</text>
+        </view>
+    </view>
+</template>

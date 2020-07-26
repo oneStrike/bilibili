@@ -1,0 +1,43 @@
+<!--components/login/login.wxml-->
+<template name="login">
+  <form>
+    <view class="login-container">
+      <view class="login-title">
+        <text>短信验证登录</text>
+        <text class="close-login" bindtap="closeLogin">X</text>
+      </view>
+      <view class="passport-select">
+        <picker class="passport-container"
+                mode="selector"
+                range="{{passport}}"
+                range-key="cname"
+                value="{{index}}"
+                bindchange="selectPassPort">
+          <view class="passport-item">{{passport[index].cname}}</view>
+          <button class="select-btn">></button>
+        </picker>
+      </view>
+      <view class="phone-input">
+        <text class="phone-area-code">+{{areaCode}}</text>
+        <input type="number"
+               class="phone"
+               value="{{phone}}"
+               bindinput="phoneInput"></input>
+      </view>
+      <view class="verification">
+        <input class="verification-input"
+               value="{{verificationCode}}"
+               bindinput="verificationCodeInput"></input>
+        <button bindtap="sendVerification" class="verification-code">{{countDown?countDown:'获取验证码'}}</button>
+      </view>
+      <view class="submit-container">
+        <button class="submit-btn"
+                form-type="submit">提交
+        </button>
+      </view>
+      <view class="toggle-login-type">
+        <button>账号密码登录</button>
+      </view>
+    </view>
+  </form>
+</template>

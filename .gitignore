@@ -1,0 +1,14 @@
+# Created by .ignore support plugin (hsz.mobi)
+.gitignore
+.idea/.gitignore
+.idea/bilibili.iml
+.idea/codeStyles/
+.idea/dictionaries/
+.idea/inspectionProfiles/
+.idea/jsLibraryMappings.xml
+.idea/jsonSchemas.xml
+.idea/markdown-navigator-enh.xml
+.idea/markdown-navigator.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml

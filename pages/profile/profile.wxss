@@ -1,0 +1,51 @@
+/* pages/profile/profile.wxss */
+@import "../../components/login/login.wxss";
+
+.profile {
+    width: 100%;
+    height: 100%;
+}
+
+.profile .user-info {
+    width: 100%;
+    text-align: center;
+}
+
+.profile .user-info .user-face {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.profile .user-info .user-name {
+    display: block;
+    margin: 40rpx 0;
+}
+
+.profile .not-login {
+    background: #fd7397;
+}
+
+.profile .login-btn {
+    text-align: center;
+}
+
+.profile .login-btn .wx-login, .profile .login-btn .bili-login {
+    width: 200rpx;
+    height: 60rpx;
+    font-size: 28rpx;
+    line-height: 60rpx;
+    display: inline-block;
+    margin: 0 40rpx;
+}
+
+.profile .bili-login-container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    background: rgba(0, 0, 0, .5);
+}

@@ -1,0 +1,221 @@
+@import '/components/popularList/popularList.wxss';
+@import '/components/followContent/followContent.wxss';
+
+.home-container {
+  width: 100%;
+  height: 100%;
+}
+
+.search-nav {
+  width: 100%;
+  height: 200rpx;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 1;
+}
+
+.search-input {
+  width: 600rpx;
+  height: 60rpx;
+  background: #f4f4f4;
+  border-radius: 100rpx;
+  position: relative;
+  font-size: 28rpx;
+  padding-left: 70rpx;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  width: 46rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 20rpx;
+}
+
+.nav {
+  width: 100%;
+  height: 100rpx;
+  display: flex;
+  align-self: flex-end;
+  border-bottom: 1rpx solid #e8e8e8;
+}
+
+.follow,
+.popular {
+  width: 50%;
+  height: 100%;
+  text-align: center;
+  line-height: 100rpx;
+  position: relative;
+}
+
+.active {
+  color: #fd7397;
+}
+
+.active::after {
+  content: "";
+  display: block;
+  width: 80rpx;
+  height: 2rpx;
+  background: #fd7397;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%)
+}
+
+.popular-container,
+.follow-content {
+  margin-top: 220rpx;
+}
+
+.popular-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: -1
+}
+
+.follow-date {
+  width: 100%;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.follow-date-detail {
+  width: 80rpx;
+  height: 50rpx;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 50rpx;
+  border-radius: 30rpx 30rpx;
+}
+
+.local-week {
+  color: #fd7397;
+}
+
+.active-follow-date {
+  background: #fd7397;
+  color: #fff;
+}
+
+.follow-list-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  border-bottom: 1rpx solid #e8e8e8;
+  position: relative;
+}
+
+.follow-hidden {
+  overflow: hidden;
+  max-height: 600rpx;
+}
+
+.empty,
+.follow-list {
+  flex: 1;
+}
+
+.follow-more {
+  width: 100%;
+  height: 40rpx;
+  position: absolute;
+  bottom: 0;
+  font-size: 24rpx;
+  color: #fd7397;
+  text-align: center;
+  background: #fff;
+}
+
+.indexes,
+.rank-container {
+  width: 100%;
+  font-size: 28rpx;
+}
+
+.indexes-header,
+.rank-header {
+  width: 100%;
+  height: 90rpx;
+  line-height: 90rpx;
+}
+
+.see-more,
+.rank-see-more {
+  float: right;
+  width: 200rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 28rpx;
+  background: #fff;
+}
+
+.see-more::after {
+  border: none
+}
+
+.rank-see-more::after {
+  border: none
+}
+
+.indexes-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+
+}
+
+.indexes-target {
+  width: 30%;
+  height: 90rpx;
+  background: #e8e8e8;
+  margin: 10rpx 0;
+  border-radius: 10rpx;
+  text-align: center;
+  line-height: 90rpx;
+}
+
+.rank-serial {
+  display: inliine-block;
+  width: 60rpx;
+  height: 60rpx;
+  text-align: center;
+  line-height: 60rpx;
+  color: #797979;
+}
+
+.top-three {
+  background: #fd7397;
+  color: #fff;
+}
+
+.rank-content {
+  display: flex;
+  margin: 40rpx 0;
+  line-height: 60rpx;
+}
+
+.rank-name {
+  width: 440rpx;
+  margin: 0 20rpx;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rank-episode{
+  color:#797979;
+}

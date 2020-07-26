@@ -1,0 +1,33 @@
+<import src="../userComment/userComment.wxml"></import>
+<template name="comment">
+  <!--    热评-->
+  <view class="hot-comment" wx:for="{{commentData.hots}}" wx:key="index">
+    <include src="common.wxml"/>
+  </view>
+  <!--    时间排序-->
+  <view class="comment-content" wx:for="{{commentData.replies}}" wx:key="index">
+    <include src="common.wxml"></include>
+  </view>
+  <!--    评论详情-->
+  <scroll-view scroll-Y="true"
+               hidden="{{!commentAll}}"
+               class="all-comment"
+               bindscrolltolower="loadMoreReply">
+    <view class="all-comment-head">
+      <text>评论详情</text>
+      <text class="all-comment-back" catchtap="hiddenAllComment">X</text>
+    </view>
+    <view hidden="{{commentAllData}}">
+      <image src="/static/images/ploading.gif"></image>
+    </view>
+    <view class="comment-all-content"
+          wx:for="{{commentAllData.replies}}"
+          wx:key="index">
+      <template is="userComment" data="{{...item}}"></template>
+    </view>
+  </scroll-view>
+  <!--        有些评论数据过大，设置个加载图-->
+  <view wx:if="{{!commentData}}">
+    <image src="/static/images/ploading.gif"></image>
+  </view>
+</template>

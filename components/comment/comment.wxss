@@ -1,0 +1,48 @@
+@import '/components/userComment/userComment.wxss';
+@import "../../components/replyComment/replyComment.wxss";
+.hot-comment, .comment-content {
+    border-bottom: 1rpx solid #eee;
+}
+
+.reply-comment {
+    max-height: 420rpx;
+    overflow: hidden;
+    margin: 0 60rpx 20rpx 130rpx;
+    background: #f4f4f4;
+    padding: 10rpx;
+}
+
+.reply-more {
+    color: #1489bf;
+}
+
+.all-comment {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 610rpx 40rpx 0 40rpx;
+    box-sizing: border-box;
+}
+
+.all-comment-head {
+    width: 100%;
+    height: 90rpx;
+    line-height: 90rpx;
+    font-size: 32rpx;
+    position: fixed;
+    top: 530rpx;
+    background: #fff;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-right: 80rpx;
+}
+
+.all-comment-back {
+    width: 90rpx;
+    height: 90rpx;
+    text-align: center;
+}

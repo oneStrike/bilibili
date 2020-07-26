@@ -1,0 +1,66 @@
+<!--pages/search/search.wxml-->
+<view class="search-container">
+    <view class="search">
+        <input focus
+               class="search-input"
+               type="text"
+               confirm-type="search"
+               bindinput="bilateral"
+               bindconfirm="goToResult"
+               value="{{searchContent}}">
+            <image class="search-icon" src="/static/images/search.jpg"></image>
+        </input>
+    </view>
+    <view class="main-search">
+        <!--        热搜-->
+        <view class="hot-search">
+            <view class="hot-search-head">
+                <text>大家都在搜</text>
+            </view>
+            <view class="hot-search-content">
+                <block wx:for="{{hotSearchData}}" wx:key="index">
+                    <view class="hot-search-item" catchtap="goToResult" data-key="{{item.keyword}}">
+                        <text>{{item.keyword}}</text>
+                    </view>
+                </block>
+            </view>
+        </view>
+        <!--        搜索建议-->
+        <view class="search-history">
+            <view class="history-search-head">
+                <text>历史搜索</text>
+            </view>
+            <scroll-view class="history-search-content" scroll-y="true">
+                <view class="history-search-item"
+                      wx:for="{{historySearchData}}"
+                      wx:key="index"
+                      data-key="{{item}}"
+                      catchtap="goToResult">
+                    <image class="history-search-icon" src="/static/images/zone/history.svg"></image>
+                    <text>{{item}}</text>
+                    <button plain
+                            class="delete-history-search"
+                            catchtap="clearHistory"
+                            data-index="{{index}}">X
+                    </button>
+                </view>
+            </scroll-view>
+            <view class="clear-history-search">
+                <button wx:if="{{historySearchData.length>0}}" catchtap="clearHistory" class="clear-btn" plain>清除历史记录
+                </button>
+            </view>
+        </view>
+        <!--        搜索建议-->
+        <view class="search-suggest-container" wx:if="{{searchContent}}">
+            <view class="search-suggest-item">
+                <view class="search-suggest"
+                      wx:for="{{suggestData}}"
+                      wx:key="index"
+                      data-key="{{item.value}}"
+                      catchtap="goToResult">
+                    <rich-text nodes="{{item.name}}"></rich-text>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

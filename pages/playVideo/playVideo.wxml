@@ -1,0 +1,82 @@
+<!-- pages/playVideo/playVideo.wxml -->
+<import src="/components/popularList/popularList.wxml"/>
+<import src="../../components/comment/comment.wxml"/>
+<import src="/components/danmu/danmu.wxml"/>
+<wxs src="../../utils/common.wxs" module="common"/>
+<view class="play-video-container">
+  <!-- 视频播放 -->
+  <view class="play-container" hidden="{{!videoData}}">
+    <video src="{{common.proxyPlayUrl(videoUrl)}}"
+           show-play-btn="{{true}}"
+           controls="{{true}}"
+           binderror="playError"
+           autoplay="{{true}}"
+           id="video">
+      <text class="play-error" hidden="{{isPlay}}">接口404</text>
+      <view class="danmu-container" wx:if="{{danmu}}">
+        <view class="danmu-item" wx:for="{{danmuData}}" wx:key="index">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+    </video>
+    <view class="video-content-head">
+      <view catchtap="showBrief" class="video-brief {{activeContent==='brief'?'active':''}}">
+        <text>简介</text>
+      </view>
+      <view catchtap="showComment" class="video-comment {{activeContent==='comment'?'active':''}}">
+        <text>评论 {{common.rePlayCount(videoData.stat.reply)}}</text>
+      </view>
+      <!-- 弹幕 -->
+      <view class="video-danmu " catchtap="toggleDanmu">
+        <image class="danmu-img"
+               src="{{danmu?'../../static/images/zone/danmu_open.svg':'../../static/images/zone/danmu_close.svg'}}"></image>
+      </view>
+    </view>
+  </view>
+  <!-- 视频简介和推荐 -->
+  <view class="detail-recommend" hidden="{{activeContent!=='brief'}}">
+    <!-- up信息 -->
+    <view hidden="{{!videoData}}" class="up-detail">
+      <image bindtap="userSpace" class="up-avatar" src="{{upData.card.face}}"></image>
+      <view class="name-fans">
+        <text class="up-name">{{upData.card.name}}</text>
+        <text class="up-fans">{{common.rePlayCount(upData.card.fans)}}粉丝</text>
+      </view>
+      <button class="attention-up">+关注</button>
+    </view>
+    <!-- 视频简介 -->
+    <view hidden="{{!videoData}}" class="video-desc {{showMore?'':'video-desc-hidden'}}">
+      <text class="video-title {{showMore?'':'video-title-hidden'}}">{{videoData.title}}</text>
+      <text catchtap="showMoreDesc" class="more-btn {{showMore?'':'more-btn-down'}}">^</text>
+      <text class="desc">{{videoData.desc}}</text>
+    </view>
+    <!-- 分P -->
+    <scroll-view wx:if="{{videoData.pages.length>1}}"
+                 scroll-x class="segment"
+                 style="width: 100%">
+      <view wx:for="{{videoData.pages}}" wx:key="index"
+            class="segment-detail {{videoCid === item.cid?'active-segment':''}}" catchtap="playSegment"
+            data-index="{{index}}" data-cid="{{videoData.pages[index].cid}}">
+        <text class="segment-name">{{item.part}}</text>
+      </view>
+    </scroll-view>
+    <!-- 视频标签 -->
+    <scroll-view scroll-x="true" class="video-tag">
+      <view class="video-tag-name" wx:for="{{videoTag}}" wx:key="index" data-tid="{{item.tag_id}}"
+            data-name="{{item.tag_name}}" bindtap="showTopic">
+        <text>{{item.tag_name}}</text>
+      </view>
+    </scroll-view>
+    <!-- 视频推荐 -->
+    <view class="video-recommend">
+      <view class="recommend-content" wx:for="{{videoRecommend}}" wx:key="index" catchtap="playRecommend"
+            data-index="{{index}}">
+        <template is="popularList" data="{{...item}}"></template>
+      </view>
+    </view>
+  </view>
+  <!-- 视频评论 -->
+  <view hidden="{{activeContent!=='comment'}}" class="comment-container">
+    <template is="comment" data="{{commentData,commentAll,commentAllData}}"></template>
+  </view>
+</view>

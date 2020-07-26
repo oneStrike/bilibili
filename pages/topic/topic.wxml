@@ -1,0 +1,39 @@
+<import src="../../components/spaceDynamic/spaceDynamic.wxml"></import>
+<wxs src="../../utils/common.wxs" module="common"></wxs>
+<view class="topic-container">
+  <view class="topic-cover">
+    <image src="//i0.hdslb.com/bfs/activity-plat/static/20181128/a5d923b4d45bba35d16a9ce00061017a/n3ygBRiMs.jpg"></image>
+  </view>
+  <view class="head">
+    <text class="topic">{{topicName}}</text>
+    <view class="topic-count">
+      <text class="view">{{common.rePlayCount(topUser.view_count)}}浏览</text>
+      <text>{{common.rePlayCount(topUser.discuss_count)}}讨论</text>
+    </view>
+  </view>
+  <view class="topic-user">
+    <text class="topic-user-title">活跃用户</text>
+    <scroll-view enable-flex="{{true}}" scroll-x="{{true}}" class="topic-user-list">
+      <view class="topic-user-avatar"
+            wx:for="{{topUser.active_users}}"
+            wx:key="index">
+        <image lazy-load="{{true}}"
+               src="{{item.user_info.face}}"
+               data-mid="{{item.user_info.uid}}"
+               bindtap="skipSpaceUser">
+        </image>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="topic-type">
+    <text class="type-title">热门</text>
+  </view>
+  <view class="topic-content">
+    <view class="content" wx:for="{{topicData}}"
+          wx:key="index">
+      <template is="spaceDynamic"
+                data="{{ ...userInfo,playId,playUrl,...item.display,...item.desc,...common.dynamic(item.card) }}">
+      </template>
+    </view>
+  </view>
+</view>

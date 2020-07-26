@@ -1,0 +1,116 @@
+// 竟然不支持 padStart
+function padStart(str) {
+  return (str + '').length < 2 ? str = '0' + str : str;
+}
+
+module.exports = {
+  //=>格式化视频时长
+  reDuration: function (time) {
+    if (!parseFloat(time)) return;
+    var m = Math.floor(time / 60);
+    var s = Math.floor(time % 60);
+    return padStart(m) + ':' + padStart(s)
+  },
+  //=>格式化播放次数
+  rePlayCount: function (num) {
+    if (!num) return 0;
+    num += '';
+    if (num.length < 5) return num;
+    if (num.length < 9) {
+      var newNum = parseInt(num.slice(0, -4) + '.' + num.slice(-4, -3));
+      return isNaN(newNum) ? 0 : newNum + '万'
+    } else if (num.length >= 9) {
+      var newNum = num.slice(0, -7);
+      newNum = parseInt(newNum.slice(0, -1) + '.' + newNum.slice(-1));
+      return isNaN(newNum) ? 0 : newNum + '亿'
+    }
+  },
+  //=>格式化时间戳
+  reTimestamp: function (timestamp) {
+    var time = getDate(timestamp * 1000),
+        year = time.getFullYear(),
+        month = time.getMonth() + 1,
+        date = time.getDate(),
+        hour = time.getHours(),
+        minute = time.getMinutes(),
+        second = time.getSeconds();
+    month = month < 10 ? "0" + month : month;
+    date = date < 10 ? "0" + date : date;
+    hour = hour < 10 ? "0" + hour : hour;
+    minute = minute < 10 ? "0" + minute : minute;
+    second = second < 10 ? "0" + second : second;
+    return year + "-" + month + "-" + date;
+  },
+  conversionFormat: function (format) {
+    switch (format) {
+      case 1:
+        return '一';
+        break;
+      case 2:
+        return '二';
+        break;
+      case 3:
+        return '三';
+        break;
+      case 4:
+        return '四';
+        break;
+      case 5:
+        return '五';
+        break;
+      case 6:
+        return '六';
+        break;
+      case 7:
+        return '日';
+    }
+  },
+  //代理播放地址
+  proxyPlayUrl: function (url,e) {
+    if (!url) return;
+    return url.replace('https://upos-sz-mirrorkodo.bilivideo.com', 'http://49.234.125.167')
+  },
+  //JSON转换
+  dynamic: function (j) {
+    return JSON.parse(j)
+  },
+  //提取空间标签
+  spaceTag: function (str, tags) {
+    if (!str || !tags) return [{s: str}];
+    var container = [];
+    var first = str.substring(0, str.indexOf(tags[0].topic_name) - 1)
+    for (var i = 0; i < tags.length; i++) {
+      var tag = '#' + tags[i].topic_name + '#',
+          lastTag = '',
+          lastIndex;
+      tags[i + 1] ? lastTag = '#' + tags[i + 1].topic_name + '#' : '';
+      lastTag ? lastIndex = str.indexOf(lastTag) : '';
+      str.replace(tag, function (s, o) {
+        if (o === 0) {
+          container.push({s: s, tid: tags[i].topic_id});
+          container.push({s: str.substring(s.length, lastIndex)})
+        } else {
+          container.push({s: str.substring(o, o + s.length), tid: tags[i].topic_id})
+          if (o + s.length !== str.length && lastTag === '') {
+            container.push({s: str.substring(o + s.length)})
+          }
+        }
+      })
+    }
+    if (first !== '') {
+      container.unshift({s: first})
+    }
+    container = container.filter(function (s) {
+      return s.s !== ''
+    })
+    return container
+  }
+}
+// str = str.replace('#' + tag[i].topic_name + '#', function (e) {
+//   s += '<span class="topic-tag" data-topicId="' + tag[i].topic_id + '">' + e + '</span>';
+//   if (i === tag.length - 1) {
+//     return s
+//   } else {
+//     return ''
+//   }
+// })

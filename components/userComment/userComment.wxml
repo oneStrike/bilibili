@@ -1,0 +1,20 @@
+<!--components/userComment/userComment.wxml-->
+<wxs src="../../utils/common.wxs" module="common"/>
+<template name="userComment">
+    <view class="comment-detail">
+        <view class="user">
+            <image class="user-avatar" src="{{member.avatar}}"></image>
+            <view class="user-info">
+                <text class="user-name {{member.level_info.current_level>=5?'level-five':''}}">{{member.uname}}</text>
+                <image class="level-icon"
+                       src="../../static/images/space/level_{{member.level_info.current_level}}.svg"></image>
+                <text class="release-time">{{common.reTimestamp(ctime)}}</text>
+            </view>
+        </view>
+        <view class="comment-message">
+            <view class="root-comment">
+                <text>{{content.message}}</text>
+            </view>
+        </view>
+    </view>
+</template>

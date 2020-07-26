@@ -1,0 +1,54 @@
+<!--pages/searchResult/searchResult.wxml-->
+<import src="/components/popularList/popularList.wxml"/>
+<view class="search-result-container">
+  <!--    搜索框-->
+  <view class="search">
+    <input class="search-input"
+            type="text"
+            confirm-type="search"
+            bindconfirm="saveResult"
+            data-type="totalrank"
+           data-source="result"
+            value="{{keyword}}">
+      <image class="search-icon" src="/static/images/search.jpg"></image>
+    </input>
+  </view>
+  <!--    顶部搜索类型-->
+  <view class="search-type-container">
+    <view catchtap="saveResult" data-type="totalrank"
+          class="search-type {{searchType==='totalrank'?'active-type':''}}">
+      <text>默认排序</text>
+    </view>
+    <view catchtap="saveResult" data-type="click" class="search-type {{searchType==='click'?'active-type':''}}">
+      <text>播放多</text>
+    </view>
+    <view bindtap="saveResult" data-type="pubdate" class="search-type {{searchType==='pubdate'?'active-type':''}}">
+      <text>新发布</text>
+    </view>
+  </view>
+  <!--    结果展示-->
+  <view hidden="{{searchType !=='totalrank'}}" class="search-result">
+    <view bindtap="playSearchVideo"
+          data-video="{{item}}"
+          wx:for="{{totalrankData.result}}"
+          wx:key="index">
+      <template data="{{...item}}" is="popularList"></template>
+    </view>
+  </view>
+  <view hidden="{{searchType !=='click'}}" class="search-result">
+    <view bindtap="playSearchVideo"
+          data-video="{{item}}"
+          wx:for="{{mostData.result}}"
+          wx:key="index">
+      <template data="{{...item}}" is="popularList"></template>
+    </view>
+  </view>
+  <view hidden="{{searchType !=='pubdate'}}" class="search-result">
+    <view catchtap="playSearchVideo"
+          data-video="{{item}}"
+          wx:for="{{newestData.result}}"
+          wx:key="index">
+      <template data="{{...item}}" is="popularList"></template>
+    </view>
+  </view>
+</view>

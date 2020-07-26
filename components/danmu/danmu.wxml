@@ -1,0 +1,6 @@
+<!--components/danmu/danmu.wxml-->
+<template name="danmu">
+    <view class="danmu-content">
+
+    </view>
+</template>

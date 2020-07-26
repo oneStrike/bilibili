@@ -1,0 +1,16 @@
+<import src="../userComment/userComment.wxml"/>
+<import src="../replyComment/replyComment.wxml"/>
+
+<template is="userComment" data="{{...item}}"></template>
+<view class="reply-comment"
+      wx:if="{{item.replies}}"
+      catchtap="showAllComment"
+      data-rpid="{{item.rpid}}"
+      data-count="{{item.count}}">
+    <block wx:for="{{item.replies}}" wx:key="index" wx:for-item="replyItem">
+        <template is="replyComment" data="{{...replyItem}}"></template>
+    </block>
+    <view class="reply-more" wx:if="{{item.count >3}}">
+        <text class="more-comment">共{{item.count}}条评论</text>
+    </view>
+</view>

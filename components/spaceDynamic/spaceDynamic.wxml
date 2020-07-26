@@ -1,0 +1,78 @@
+<!--components/spaceDynamic/spaceDynamic.wxml-->
+<wxs src="../../utils/common.wxs" module="common"></wxs>
+<wxs src="./handler.wxs" module="handler"></wxs>
+<template name="spaceDynamic">
+  <view class="user-content">
+    <image class="user-face" src="{{card.face||user_profile.info.face}}"></image>
+    <view class="user-name-time">
+      <text class="user-name">{{card.name||user_profile.info.uname}}</text>
+      <text class="issue-time">{{common.reTimestamp(timestamp)}} {{usr_action_txt}}</text>
+    </view>
+  </view>
+  <view class="dynamic-title">
+    <view wx:for="{{common.spaceTag(dynamic||item.description,topic_info.topic_details)}}"
+          wx:key="index"
+          class="title-content {{item.tid?'topic-tag':''}}"
+          data-topic="{{ {tid:item.tid,name:item.s} }}"
+          bindtap="showTopic">
+      {{item.s}}
+    </view>
+  </view>
+  <view class="video-cover" wx:if="{{type===8}}">
+    <image wx:if="{{pic&&playId!==cid}}"
+           src="{{pic}}"
+           bindtap="playDynamic"
+           data-aid="{{aid}}"
+           data-cid="{{cid}}"
+           lazy-load="{{true}}">
+    </image>
+    <video wx:if="{{playId===cid&&type===8}}"
+           id="space"
+           src="{{common.proxyPlayUrl(playUrl)}}"
+           show-play-btn="{{true}}"
+           controls="{{true}}"
+           poster="{{pic}}"
+           autoplay="{{true}}"
+           show-fullscreen-btn="{{false}}"
+           show-center-play-btn="{{false}}"
+           bindtimeupdate="recordDuration">
+    </video>
+    <view class="play-count" wx:if="{{pic&&playId!==cid}}">
+      <text>{{common.reDuration(duration)}}</text>
+      <text>{{common.rePlayCount(stat.view)}}观看</text>
+      <text>{{common.rePlayCount(stat.danmaku)}}弹幕</text>
+    </view>
+    <block wx:if="{{item.pictures.length>=1}}">
+      <view class="{{item.pictures.length>1?'daily-img':''}}">
+        <image lazy-load="{{true}}"
+               wx:for="{{item.pictures}}"
+               wx:key="index"
+               src="{{item.img_src}}"></image>
+      </view>
+    </block>
+  </view>
+  <view class="video-info">
+    <view class="video-title">
+      <text>{{title}}</text>
+    </view>
+    <view class="footer-info">
+      <button class="share"
+              open-type="share"
+              id="space">
+        <text>{{common.rePlayCount(repost)}}</text>
+        <image src="../../static/images/space/share.svg"></image>
+      </button>
+      <button class="reply"
+              bindtap="showReply"
+              data-id="{{ {aid,cid,mid:owner.mid} }}"
+              data-item="{{item}}">
+        <text>{{stat?common.rePlayCount(stat.reply):common.rePlayCount(item.reply)}}</text>
+        <image src="../../static/images/space/reply.svg"></image>
+      </button>
+      <button class="like" bindtap="giveLike">
+        <text>{{common.rePlayCount(like)}}</text>
+        <image src="../../static/images/space/like.svg"></image>
+      </button>
+    </view>
+  </view>
+</template>

@@ -1,0 +1,84 @@
+@import "../../components/spaceDynamic/spaceDynamic.wxss";
+
+.topic-container {
+    width: 100%;
+    padding: 0 10rpx;
+    box-sizing: border-box;
+}
+
+.topic-container .topic-cover {
+    width: 100%;
+    max-height: 200rpx;
+}
+
+.topic-container .topic-cover image {
+    width: 100%;
+    height: 200rpx;
+}
+
+.topic-container .head {
+    height: 100rpx;
+    width: 100%;
+    margin: 40rpx 0;
+}
+
+.topic-container .head .topic {
+    font-size: 36rpx;
+    color: #fd7397;
+}
+
+.topic-container .head .topic-count {
+    width: 100%;
+    height: 40rpx;
+    margin-top: 20rpx;
+    font-size: 26rpx;
+}
+
+.head .topic-count .view {
+    margin: 0 20rpx;
+}
+
+.topic-container .topic-user {
+    width: 100%;
+    overflow: hidden;
+}
+
+.topic-container .topic-user .topic-user-title,
+.topic-container .topic-type .type-title {
+    width: 100%;
+    height: 60rpx;
+    display: inline-block;
+    background: #fd7397;
+    line-height: 60rpx;
+    border-radius: 10rpx;
+    text-indent: 1em;
+    margin-bottom: 20rpx;
+}
+
+.topic-user .topic-user-list {
+    width: 100%;
+    height: 120rpx;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20rpx;
+}
+
+.topic-user-list .topic-user-avatar {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    margin: 0 8rpx;
+}
+
+.topic-user-list .topic-user-avatar image {
+    width: 120rpx;
+    height: 120rpx;
+}
+
+.topic-container .topic-content .content {
+    width: 100%;
+    margin: 40rpx 0;
+    border-bottom: 4rpx #f4f4f4 solid;
+}

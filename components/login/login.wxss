@@ -1,0 +1,139 @@
+/* components/login/login.wxss */
+.login-container {
+    width: 90%;
+    height: 800rpx;
+    background: #fff;
+    border-radius: 40rpx;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 40rpx;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.login-container .login-title {
+    width: 100%;
+    height: 90rpx;
+    display: flex;
+    justify-content: space-between;
+    line-height: 90rpx;
+}
+
+.login-container .login-title .close-login {
+    width: 90rpx;
+    height: 90rpx;
+    text-align: center;
+}
+
+.passport-select .passport-container {
+    width: 100%;
+    height: 90rpx;
+    background: #f4f4f4;
+    line-height: 90rpx;
+    padding: 0 40rpx;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+    position: relative;
+}
+
+.passport-select .passport-container .passport-item {
+    flex: 1;
+    display: inline-block;
+}
+
+.passport-select .passport-container .select-btn {
+    width: 90rpx;
+    height: 90rpx;
+    background: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.passport-select .passport-container .select-btn::after {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.login-container .phone-input {
+    width: 100%;
+    height: 90rpx;
+    background: #f4f4f4;
+    display: flex;
+    align-items: center;
+    border-radius: 10rpx;
+}
+
+.login-container .phone-input .phone-area-code {
+    width: 90rpx;
+    height: 40rpx;
+    line-height: 40rpx;
+    border-right: 1rpx solid #dddddd;
+    margin-right: 10rpx;
+}
+
+.login-container .phone-input .phone {
+    flex: 1;
+}
+
+.login-container .verification {
+    width: 100%;
+    height: 90rpx;
+    display: flex;
+    align-items: center;
+}
+
+.login-container .verification .verification-input {
+    flex: 2;
+    height: 90rpx;
+    padding: 20rpx;
+    background: #f4f4f4;
+    box-sizing: border-box;
+    border-radius: 10rpx;
+    margin-right: 20rpx;
+}
+
+.login-container .verification .verification-code {
+    flex: 1;
+    height: 90rpx;
+    font-size: 30rpx;
+    line-height: 90rpx;
+    border-radius: 60rpx;
+    color: #fa7298;
+    border: 1rpx solid #fa7298;
+    background: #fff;
+}
+
+.login-container .submit-container {
+    width: 100%;
+    height: 90rpx;
+}
+
+.login-container .submit-container .submit-btn {
+    background: #f4f4f4;
+    border-radius: 90rpx;
+    color: #ababab;
+}
+
+.login-container .submit-container .submit-btn::after {
+    border: none;
+}
+
+.login-container .toggle-login-type > button {
+    width: 100%;
+    height: 90rpx;
+    font-size: 28rpx;
+    color: #fa7298;
+    text-align: center;
+    line-height: 90rpx;
+    background: #fff;
+}
+
+.login-container .toggle-login-type > button::after {
+    border: none;
+}

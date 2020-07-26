@@ -1,0 +1,47 @@
+{
+  "pages": [
+    "pages/profile/profile",
+    "pages/index/index",
+    "pages/userSpace/userSpace",
+    "pages/search/search",
+    "pages/playVideo/playVideo",
+    "pages/searchResult/searchResult",
+    "pages/partitionContent/partitionContent",
+    "pages/partition/partition",
+    "pages/topic/topic",
+    "components/comment/comment"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "哔哩哔哩",
+    "backgroundColor": "#eeeeee",
+    "backgroundTextStyle": "light",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "selectedColor": "#fd7397",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/images/home.jpg",
+        "selectedIconPath": "/static/images/home_active.jpg"
+      },
+      {
+        "pagePath": "pages/partition/partition",
+        "text": "分区",
+        "iconPath": "/static/images/partition.jpg",
+        "selectedIconPath": "/static/images/partition_active.jpg"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "/static/images/profile.jpg",
+        "selectedIconPath": "/static/images/profile_active.jpg"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,22 @@
+<!--pages/profile/profile.wxml-->
+<import src="/components/login/login.wxml"></import>
+<view class="profile">
+  <view class="user-info">
+    <image class="user-face" src="{{userInfo.avatarUrl||'../../static/images/default_user_face.png'}}"></image>
+    <text class="user-name">{{userInfo.nickName||'bilibili'}}</text>
+  </view>
+  <view class="login-btn">
+    <button bindgetuserinfo="userInfo"
+            open-type="getUserInfo"
+            class="wx-login {{loginType==='wx'?'':'not-login'}}"
+            disabled="{{loginType==='wx'}}">微信登录
+    </button>
+    <button class="bili-login {{loginType==='bili'?'':'not-login'}}"
+            disabled="{{loginType==='bili'}}"
+            bindtap="biliLogin">B站登录
+    </button>
+  </view>
+  <view class="bili-login-container" wx:if="{{loginType==='bili'}}">
+    <template is="login" data="{{...passportData,...loginOptions}}"></template>
+  </view>
+</view>

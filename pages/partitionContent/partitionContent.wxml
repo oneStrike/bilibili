@@ -1,0 +1,31 @@
+<import src="/components/popularList/popularList.wxml"></import>
+<view class="partition-content-container">
+    <!--    头部导航-->
+    <scroll-view enable-flex scroll-x class="head-nav">
+        <view class="nav-content {{currentIndex === index?'active-nav-item':''}}"
+              wx:for="{{mainPar.item}}"
+              wx:key="index"
+              bindtap="toggleType"
+              data-index="{{index}}">
+            <text class="nav-item">{{item.itemName}}</text>
+        </view>
+    </scroll-view>
+    <!--    主体内容-->
+    <view class="main-content">
+        <view hidden="{{currentIndex!==mainIndex}}"
+              wx:for="{{mainPar.item.length}}"
+              wx:key="index"
+              wx:for-index="mainIndex">
+            <block hidden="{{!partitionData[mainIndex]}}">
+                <view class="main-detail"
+                      wx:for="{{partitionData[mainIndex]}}"
+                      wx:key="index"
+                      bindtap="playPartition"
+                      data-item="{{item}}"
+                      data-index="{{index}}">
+                    <template is="popularList" data="{{...item}}"></template>
+                </view>
+            </block>
+        </view>
+    </view>
+</view>

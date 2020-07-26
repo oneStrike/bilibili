@@ -1,0 +1,11 @@
+<!--pages/partition/partition.wxml-->
+<view class="partition">
+    <view bindtap="showPartition"
+          data-par="{{item}}"
+          class="partition-item"
+          wx:for="{{partitionList}}"
+          wx:key="svgName">
+        <image class="partition-icon" src="/static/images/zone/{{item.svgName}}.svg"></image>
+        <text class="partition-type">{{item.partitionName}}</text>
+    </view>
+</view>

@@ -1,0 +1,7 @@
+<import src="/components/popularList/popularList.wxml"/>
+<view catchtap="playSearchVideo"
+      data-video="{{item}}"
+      wx:for="{{mostData.result}}"
+      wx:key="index">
+  <template data="{{...item}}" is="popularList"></template>
+</view>

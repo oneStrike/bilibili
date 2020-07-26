@@ -1,0 +1,90 @@
+<!--pages/index/index.wxml-->
+<import src="/components/popularList/popularList.wxml"/>
+<import src="/components/followContent/followContent.wxml"/>
+<wxs src="../../utils/common.wxs" module="common"/>
+
+<view calss="home-container">
+    <!-- 头部导航 -->
+    <view class="search-nav">
+        <view class="search" catchtap="showSearch">
+            <input disabled="true" class="search-input" type="text">
+                <image class="search-icon" src="/static/images/search.jpg"></image>
+            </input>
+        </view>
+        <view class="nav">
+            <view catchtap="handlerPopular" class="popular {{activePlate===0?'active':''}}" plain>
+                <text>热门</text>
+            </view>
+            <view catchtap="handlerFollow" class="follow {{activePlate===1?'active':''}}" plain>
+                <text>追番</text>
+            </view>
+        </view>
+    </view>
+    <!-- 热门 -->
+    <view class="popular-container" hidden="{{!(activePlate === 0)}}">
+        <view catchtap="playCurrentVideo" data-index="{{index}}" class="popular-content" wx:for="{{popularData}}"
+              wx:key="index">
+            <template data="{{...item}}" is="popularList"></template>
+        </view>
+    </view>
+    <!-- 追番 -->
+    <view hidden="{{!(activePlate === 1)}}" class="follow-content">
+        <view class="follow-date">
+            <!-- 导航日期 -->
+            <text
+                    class="follow-date-detail {{item.is_today ===1?'local-week':''}} {{item.day_of_week === currentId?'active-follow-date':''}}"
+                    catchtap="handlerFollowData"
+                    data-id="{{item.day_of_week}}"
+                    data-index="{{index}}"
+                    wx:for="{{followData}}"
+                    wx:key="day_of_week">{{item.day_of_week ===
+                currentId?'周'+common.conversionFormat(item.day_of_week):common.conversionFormat(item.day_of_week)}}
+            </text>
+        </view>
+        <!-- 番剧内容 -->
+        <view hidden="{{!(index===currentIndex)}}" class="follow-list-container {{showMoreFollow?'':'follow-hidden'}}"
+              wx:for="{{followData}}" wx:key="day_of_week">
+            <view class='follow-list'
+                  wx:for="{{followData[index].episodes}}"
+                  wx:key="day_of_week"
+                  data-season="{{item}}"
+                  bindtap="playSeason">
+                <template data="{{...item}}" is="followContent"></template>
+            </view>
+            <!-- 动态创建空组件让最后一列从左排列 -->
+            <view class="empty"
+                  wx:for="{{followData[index].episodes.length%4 === 0?0:(4-followData[index].episodes.length%4)}}"
+                  wx:key="index"></view>
+            <text catchtap="handlerFollowMore" class="follow-more"
+                  wx:if="{{followData[index].episodes.length>8&&!showMoreFollow}}">显示所有番剧更新
+            </text>
+        </view>
+        <!-- 番剧索引 -->
+        <view class="indexes">
+            <view class="indexes-header">
+                <text class="indexes-title">索引</text>
+                <button class="see-more">查看更多 ></button>
+            </view>
+            <view class="indexes-list">
+                <text class="indexes-target indexes-funny">搞笑</text>
+                <text class="indexes-target indexes-blood">热血</text>
+                <text class="indexes-target indexes-fantasy">奇幻</text>
+                <text class="indexes-target indexes-encorage">励志</text>
+                <text class="indexes-target indexes-moe">萌系</text>
+                <text class="indexes-target indexes-movement">运动</text>
+            </view>
+        </view>
+        <!-- 番剧排行 -->
+        <view class="rank-container">
+            <view class="rank-header">
+                <text class="rank-title">番剧排行</text>
+                <button class="rank-see-more">查看更多 ></button>
+            </view>
+            <view class="rank-content" wx:for="{{sevenRanking}}" wx:key="season_id">
+                <text class="rank-serial {{item.rank <=3?'top-three':''}}">{{item.rank}}</text>
+                <text class="rank-name">{{item.title}}</text>
+                <text class="rank-episode">{{item.new_ep.index_show}}</text>
+            </view>
+        </view>
+    </view>
+</view>

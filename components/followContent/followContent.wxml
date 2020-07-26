@@ -1,0 +1,10 @@
+<!--components/followContent/followContent.wxml-->
+<template name="followContent">
+	<view class="follow-detail">
+		<image class="follow-cover" src="{{cover}}"></image>
+		<view class="follow-drama">
+			<text class="follow-name">{{title}}</text>
+			<text class="follow-episode">{{pub_index||delay_reason}}</text>
+		</view>
+	</view>
+</template>

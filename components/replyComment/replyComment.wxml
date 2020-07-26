@@ -1,0 +1,10 @@
+<!--components/replyComment/replyComment.wxml-->
+<template name="replyComment">
+    <view class="reply-detail">
+        <text class="reply-user">{{member.uname}}:</text>
+        <text class="reply-content">{{content.message}}</text>
+    </view>
+    <view class="reply-all">
+
+    </view>
+</template>
